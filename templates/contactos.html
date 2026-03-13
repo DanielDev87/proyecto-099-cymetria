@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-body shadow-sm border-primary">
+            <h5>{{ 'Editar Contacto ✏️' if contacto_edit else 'Nuevo Contacto 🤓' }}</h5>
+            
+            <form action="{{ url_for('update_contacto', id=contacto_edit.id) if contacto_edit else url_for('add_contacto') }}" method="POST">
+                <div class="mb-2">
+                    <label class="form-label small">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" 
+                           value="{{ contacto_edit.nombre if contacto_edit else '' }}" required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label small">Teléfono</label>
+                    <input type="text" name="telefono" class="form-control" 
+                           value="{{ contacto_edit.telefono if contacto_edit else '' }}" required>
+                </div>
+                
+                <button class="btn {{ 'btn-warning' if contacto_edit else 'btn-primary' }} w-100">
+                    {{ 'Actualizar Contacto ✏️' if contacto_edit else 'Guardar Contacto 💾' }}
+                </button>
+                
+                {% if contacto_edit %}
+                    <a href="/" class="btn btn-link btn-sm w-100 mt-2 text-secondary">Cancelar edición 😵‍💫</a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <table class="table bg-white shadow-sm align-middle">
+            <thead class="table-dark">
+                <tr><th>Nombre</th><th>Teléfono</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                {% for c in contactos %}
+                <tr class="{{ 'table-warning' if contacto_edit and contacto_edit.id == c.id }}">
+                    <td>{{ c.nombre }}</td>
+                    <td>{{ c.telefono }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="/?edit={{ c.id }}" class="btn btn-outline-primary btn-sm">Editar ✏️</a>
+                            <a href="/contacto/delete/{{ c.id }}" class="btn btn-outline-danger btn-sm">Borrar 🗑️</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

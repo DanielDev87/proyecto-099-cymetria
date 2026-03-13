@@ -1,0 +1,21 @@
+{
+    "contactos": [
+        {
+            "id": 1,
+            "nombre": "Popeye el Marino",
+            "telefono": "999999"
+        },
+        {
+            "id": 2,
+            "nombre": "Oliva",
+            "telefono": "777777"
+        }
+    ],
+    "notas": [
+        {
+            "id": 1,
+            "titulo": "Mi nota",
+            "contenido": "ejemplo bla bla bla"
+        }
+    ]
+}

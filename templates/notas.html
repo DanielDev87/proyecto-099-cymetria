@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-body shadow-sm">
+            <form action="/nota/add" method="POST">
+                <input type="text" name="titulo" class="form-control mb-2" placeholder="Título Nota" required>
+                <textarea name="contenido" class="form-control mb-2" placeholder="Contenido"></textarea>
+                <button class="btn btn-success w-100">Guardar Nota 💾</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8 row">
+        {% for n in notas %}
+        <div class="col-md-6 mb-3">
+            <div class="card border-success">
+                <div class="card-header d-flex justify-content-between">
+                    {{ n.titulo }}
+                    <a href="/nota/delete/{{ n.id }}" class="btn-close text-danger"></a>
+                </div>
+                <div class="card-body">{{ n.contenido }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
